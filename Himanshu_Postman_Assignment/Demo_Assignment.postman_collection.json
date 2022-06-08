@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "358ad473-dbdd-4f81-8baa-8ea3d29cc43b",
+		"name": "Demo_Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var n1= \"Himanshu\";",
+							"pm.environment.set(\"ename\", n1);",
+							"",
+							"const salary1= 15000;",
+							"pm.environment.set(\"esalary\",salary1);",
+							"",
+							"const age1= 22;",
+							"pm.environment.set(\"eage\",age1);",
+							"",
+							"",
+							"console.log(\"This is a pre-script for POST method\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Himanshu\");",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");});",
+							"",
+							"pm.test(\"test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"eid\", jsonData.data.id);",
+							"})",
+							"",
+							"let jsonData = pm.response.json();  ",
+							"console.log(jsonData.data);  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{ename}}\",\n    \"salary\": \"{{esalary}}\",\n    \"age\":\"{{eage}}\"    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/create",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"This is the pre-script of GET method\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"status\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"  ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/employee/{{eid}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"employee",
+						"{{eid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var n1= \"Himanshuknoldus\";",
+							"pm.environment.set(\"ename\", n1);",
+							"console.log(\"This is the pre-script of PUT method\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"message matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been updated.\");",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.value).to.eql(data.name);",
+							"});",
+							"",
+							"let jsonData = pm.response.json();  ",
+							"console.log(jsonData.data);  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\n        \"name\": \"{{ename}}\",\n        \"salary\": \"{{esalary}}\",\n        \"age\":\"{{eage}}\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/update/{{eid}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"update",
+						"{{eid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"This is the pre-script after Post method\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 100ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1200);",
+							"});",
+							"",
+							"let jsonData = pm.response.json();  ",
+							"console.log(jsonData.message);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/employee/{{eid}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"employee",
+						"{{eid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"This is the pre-script of DELETE method\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"message matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been deleted.\");",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header('Content-Type', 'text/html; charset=iso-8859-1');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/delete/{{eid}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"delete",
+						"{{eid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
