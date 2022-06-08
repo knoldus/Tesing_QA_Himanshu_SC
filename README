@@ -1,0 +1,29 @@
+Description:
+Design a BDD Test automation Framework with Selenium WebDriver + Java + Maven + TestNg
+
+Guidelines:
+
+1. Intellij should be used as an IDE.
+2. Selenium 4 will be used
+3. All the data inputs should be feed from an external excel file data source.
+4. Page object model design pattern should be there.
+5. Following Common exceptions should be handle properly:
+    * WebDriver Exception               * NoSuchElementException
+    *ElementNotVisibleException         * TimeoutException             *StaleElementReferenceException
+6. Take a screenshot when a test failed.
+7. Tests should be executed on Chrome and Firefox browsers.
+8. Tests should be executed in headless browser.
+9. Tests should be executed from linux terminal from mvn command. (Should -not execute from intellij)
+10. Proper wait should be there no thread.sleep should be used.
+11. Add README file as well.
+
+Solution:
+
+To run this assignment, there are two ways:
+a. Run the below command in command prompt to run t he tests and to get the test execution report.
+   ->   mvn test
+
+b. A Runner class to run the tests. This class will use the TestNG annotation @RunWith(), which tells TestNG what is the test runner class.
+AbstractTestNGCucumberTests – Runs each cucumber scenario found in the features as separated test.
+
+
